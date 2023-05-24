@@ -89,7 +89,6 @@ paths:
         '401':
           description: "Unauthorized"
 
-paths:
   /api/v1/roles:
     post:
       summary: "Create a new role"
@@ -243,7 +242,6 @@ paths:
           description: "Unauthorized"
 
 
-paths:
   /api/v1/me/login-history:
     get:
       summary: "Get user login history"
