@@ -1,0 +1,157 @@
+openapi: "3.0.0"
+info:
+  title: 'Roles Management Service'
+  version: "0.1.0"
+
+paths:
+  /api/v1/roles:
+    post:
+      summary: "Create a new role"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_name:
+                  type: string
+      responses:
+        '200':
+          description: "Role created"
+        '400':
+          description: "Bad request"
+        '401':
+          description: "Unauthorized"
+
+    get:
+      summary: "Get all roles"
+      responses:
+        '200':
+          description: "Roles retrieved successfully"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    role_name:
+                      type: string
+        '401':
+          description: "Unauthorized"
+
+  /api/v1/roles/{role_name}:
+    post:
+      summary: "Add a new permission to a role"
+      parameters:
+        - in: path
+          required: True
+          name: role_name
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                permission_name:
+                  type: string
+      responses:
+        '200':
+          description: "Permission added to role"
+        '400':
+          description: "Bad request"
+        '401':
+          description: "Unauthorized"
+    put:
+      summary: "Update a role"
+      parameters:
+        - in: path
+          required: True
+          name: role_name
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_name:
+                  type: string
+      responses:
+        '200':
+          description: "Role updated"
+        '400':
+          description: "Bad request"
+        '401':
+          description: "Unauthorized"
+    delete:
+      summary: "Delete a role"
+      parameters:
+        - in: path
+          required: True
+          name: role_name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Role deleted"
+        '400':
+          description: "Bad request"
+        '401':
+          description: "Unauthorized"
+
+  /api/v1/roles/user/{user_id}:
+    put:
+      summary: "Update roles of a user"
+      parameters:
+        - in: path
+          required: True
+          name: user_id
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: "Roles updated successfully"
+        '400':
+          description: "Bad request"
+        '401':
+          description: "Unauthorized"
+    get:
+      summary: "Get all roles of a user"
+      parameters:
+        - in: path
+          required: True
+          name: user_id
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Roles retrieved successfully"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    role_name:
+                      type: string
+        '401':
+          description: "Unauthorized"

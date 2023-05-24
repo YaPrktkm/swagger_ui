@@ -1,0 +1,91 @@
+openapi: "3.0.0"
+info:
+  title: 'Authentication Service'
+  version: "0.1.0"
+
+paths:
+  /api/v1/register:
+    post:
+      summary: "Register a new user"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: "User registered"
+        '400':
+          description: "Bad request"
+
+  /api/v1/login:
+    post:
+      summary: "Login user"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: "Logged in"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  refresh_token:
+                    type: string
+        '401':
+          description: "Unauthorized"
+
+  /api/v1/refresh-token:
+    post:
+      summary: "Refresh access token"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+      responses:
+        '200':
+          description: "Access token refreshed"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  refresh_token:
+                    type: string
+        '401':
+          description: "Unauthorized"
+
+  /api/v1/logout:
+    post:
+      summary: "User logout"
+      responses:
+        '200':
+          description: "Logged out"
+        '401':
+          description: "Unauthorized"
+

@@ -1,0 +1,111 @@
+openapi: "3.0.0"
+info:
+  title: 'Account information Service'
+  version: "0.1.0"
+
+paths:
+  /api/v1/me/login-history:
+    get:
+      summary: "Get user login history"
+      responses:
+        '200':
+          description: "User login history retrieved successfully"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    login_time:
+                      format: date-time
+                    user_agent:
+                      format: string
+                    ip_address:
+                      format: string
+        '401':
+          description: "Unauthorized"
+
+  /api/v1/me/permissions:
+    get:
+      summary: "Get user permissions"
+      responses:
+        '200':
+          description: "User permissions retrieved successfully"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    permission_name:
+                      format: string
+        '401':
+          description: "Unauthorized"
+
+  /api/v1/me/:
+    get:
+      summary: "Get user information"
+      responses:
+        '200':
+          description: "User information retrieved successfully"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    format: string
+                  email:
+                    format: string
+                  first_name:
+                    format: string
+                  last_name:
+                    format: string
+                  phone_number:
+                    format: string
+                  address:
+                    format: string
+                  city:
+                    format: string
+                  country:
+                    format: string
+                  postal_code:
+                    format: string
+        '401':
+          description: "Unauthorized"
+    post:
+        summary: "Update user information"
+        requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    username:
+                      format: string
+                    email:
+                      format: string
+                    first_name:
+                      format: string
+                    last_name:
+                      format: string
+                    phone_number:
+                      format: string
+                    address:
+                      format: string
+                    city:
+                      format: string
+                    country:
+                      format: string
+                    postal_code:
+                      format: string
+        responses:
+            '200':
+              description: "User information updated successfully"
+            '400':
+              description: "Bad request"
+            '401':
+              description: "Unauthorized"
